@@ -1,3 +1,10 @@
+<?php
+
+function fecha(){
+    echo date("d/m/Y H:i:s");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
