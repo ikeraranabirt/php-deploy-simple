@@ -11,7 +11,7 @@ require __DIR__ . '/../app/Controllers/CSVController.php';
 use App\Controllers\CSVController;
 
 // Ruta del CSV donde guardaremos los mensajes
-$csvPath = __DIR__ . '/../app/messages.csv';
+$csvPath = __DIR__ . '/../data/messages.csv';
 
 // Instanciamos el controlador
 $controller = new CSVController($csvPath);
