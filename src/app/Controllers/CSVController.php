@@ -12,7 +12,7 @@ class CSVController
     }
 
     // GET /api/messages
-    public function index(): void
+    public function getText(): void
     {
         if (!file_exists($this->csvPath)) {
             echo json_encode([]);
@@ -44,7 +44,7 @@ class CSVController
     }
 
     // POST /api/messages
-    public function store(): void
+    public function storeText(): void
     {
         // Leer JSON del body
         $body = file_get_contents('php://input');
