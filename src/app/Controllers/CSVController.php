@@ -14,8 +14,16 @@ class CSVController
     // GET /api/messages
     public function getText(): void
     {
+        $info = [
+            'path'        => $this->csvPath,
+            'exists'      => file_exists($this->csvPath),
+            'is_readable' => is_readable($this->csvPath),
+            'is_writable' => is_writable($this->csvPath),
+        ];
+
+        // Si NO existe, mostramos info y salimos
         if (!file_exists($this->csvPath)) {
-            echo json_encode([]);
+            echo json_encode($info, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
             return;
         }
 
@@ -28,20 +36,31 @@ class CSVController
 
         // Leer encabezado
         $header = fgetcsv($handle);
-        $rows = [];
+        $rows   = [];
 
         while (($data = fgetcsv($handle)) !== false) {
             $rows[] = [
-                'id'   => (int)$data[0],
-                'text' => $data[1],
-                'date' => $data[2]
+                'id'   => (int)($data[0] ?? 0),
+                'text' => $data[1] ?? '',
+                'date' => $data[2] ?? '',
             ];
         }
 
         fclose($handle);
 
-        echo json_encode($rows, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+        echo json_encode(
+            [
+                'debug' => [
+                    'info'   => $info,
+                    'header' => $header,
+                    'count'  => count($rows),
+                ],
+                'data' => $rows,
+            ],
+            JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE
+        );
     }
+
 
     // POST /api/messages
     public function storeText(): void
