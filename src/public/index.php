@@ -17,8 +17,22 @@ $csvPath = __DIR__ . '/../data/messages.csv';
 $controller = new CSVController($csvPath);
 
 // Obtenemos método y ruta
+// $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
+// $uri    = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/';
+
 $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
-$uri    = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/';
+
+$uri = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/';
+
+// 1) Si en la URL aparece "index.php", cortamos desde ahí hacia delante
+$indexPos = strpos($uri, 'index.php');
+if ($indexPos !== false) {
+    // Nos quedamos con lo que viene DESPUÉS de "index.php"
+    $uri = substr($uri, $indexPos + strlen('index.php'));
+}
+
+// 2) Normalizamos para que siempre empiece por una sola barra
+$uri = '/' . trim($uri, '/');
 
 // Enrutado muy sencillo: solo una ruta /api/messages
 if ($uri === '/api/messages') {
