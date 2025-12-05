@@ -1,8 +1,9 @@
 {
-    "name": "iker/deploy-api",
-    "autoload": {
-        "psr-4": {
-            "App\\": "src/app/"
-        }
+  "name": "iker/deploy-api",
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/",
+      "App\\Config\\": "config/"
     }
+  }
 }

@@ -13,21 +13,10 @@ class MessageController
     public function __construct(PDO $pdo)
     {
         $this->pdo = $pdo;
-        $this->ensureTableExists();
+        // $this->ensureTableExists();
     }
 
-    private function ensureTableExists(): void
-    {
-        $sql = "
-            CREATE TABLE IF NOT EXISTS messages (
-                id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                text TEXT NOT NULL,
-                created_at DATETIME NOT NULL
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-        ";
 
-        $this->pdo->exec($sql);
-    }
 
     public function getMessages(): void
     {
@@ -85,5 +74,18 @@ class MessageController
             ],
             JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE
         );
+    }
+
+    private function ensureTableExists(): void
+    {
+        $sql = "
+            CREATE TABLE IF NOT EXISTS messages (
+                id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                text TEXT NOT NULL,
+                created_at DATETIME NOT NULL
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+        ";
+
+        $this->pdo->exec($sql);
     }
 }

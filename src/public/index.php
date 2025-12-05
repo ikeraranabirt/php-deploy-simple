@@ -16,10 +16,6 @@ $csvPath = __DIR__ . '/../data/messages.csv';
 // Instanciamos el controlador
 $controller = new CSVController($csvPath);
 
-// Obtenemos método y ruta
-// $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
-// $uri    = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/';
-
 $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 
 $uri = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/';
