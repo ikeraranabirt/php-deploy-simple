@@ -6,7 +6,7 @@ namespace App\Controllers;
 
 use PDO;
 
-class MessageController
+class BBDDController
 {
     private PDO $pdo;
 
@@ -15,7 +15,6 @@ class MessageController
         $this->pdo = $pdo;
         // $this->ensureTableExists();
     }
-
 
 
     public function getMessages(): void

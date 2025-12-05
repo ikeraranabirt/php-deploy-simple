@@ -43,8 +43,6 @@ class CSVController
         echo json_encode($rows, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
     }
 
-
-
     // POST /api/messages
     public function storeText(): void
     {

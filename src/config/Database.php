@@ -31,17 +31,14 @@ class Database
         $dsn = "mysql:host={$this->host};dbname={$this->dbname};charset=utf8mb4";
 
         try {
-            $pdo = new PDO($dsn, $this->user, $this->pass, [
+            return new PDO($dsn, $this->user, $this->pass, [
                 PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
             ]);
-
-            return $pdo;
-
         } catch (PDOException $e) {
             die(json_encode([
-                'error' => 'Error de conexión a la base de datos',
-                'details' => $e->getMessage()
+                'error'   => 'Error de conexión a la base de datos',
+                'details' => $e->getMessage(),
             ]));
         }
     }
